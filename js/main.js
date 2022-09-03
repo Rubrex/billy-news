@@ -62,8 +62,12 @@ async function loadNews(category_id, catagoryName) {
   try {
     const response = await fetch(uri);
     const data = await response.json();
-    showNews(data.data);
+    const articles = data.data;
+    // Sorting article based on views
+    articles.sort((a, b) => b.total_view - a.total_view);
+    showNews(articles);
     countNewsOrEmpty(data.data, catagoryName);
+    console.log(articles);
   } catch (err) {
     alert(err);
   }
@@ -92,9 +96,10 @@ function showNews(allNews) {
     allNews.forEach((news) => {
       const div = document.createElement("div");
       div.innerHTML = `
-        <label class="bg-white rounded-md shadow-sm my-6 cursor-pointer hover:shadow-md transition-shadow " id="${
-          news._id
-        }" onclick="getModalInfo('${news._id}')" for="my-modal-3">
+      <label id="${news._id}" onclick="getModalInfo('${
+        news._id
+      }')" for="my-modal-3">
+        <div class="bg-white rounded-md shadow-sm my-6 cursor-pointer hover:shadow-md transition-shadow " >
         <div class="grid grid-cols-1 md:grid-cols-4 p-6">
           <!-- News Image -->
           <div class="mr-2 mb-4 md:mb-0">
@@ -150,6 +155,7 @@ function showNews(allNews) {
             </div>
           </div>
         </div>
+      </div>
       </label>
         `;
       cardsContainer.appendChild(div);
