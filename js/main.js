@@ -117,7 +117,7 @@ function showNews(allNews) {
             >
               ${news.title}
             </h2>
-            <p class="text-articlePeraColor text-md md:text-lg mt-2 md:mt-0">
+            <p class="text-slate-700 text-md md:text-lg mt-2 md:mt-0">
              ${checkMaximumWords(news.details)}
             </p>
             <div
