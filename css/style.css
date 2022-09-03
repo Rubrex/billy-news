@@ -46,6 +46,7 @@ code {
   background-color: rgb(241, 241, 241);
   padding: 0 5px;
   border-radius: 5px;
+  display: inline-block;
 }
 .card-body p {
   font-size: 17px;
