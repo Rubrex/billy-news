@@ -5,9 +5,13 @@ const spinner = document.getElementById("spinner");
 // IIFE for loading Categories
 (async function getCategory(categoryNav) {
   const uri = "https://openapi.programming-hero.com/api/news/categories";
-  const response = await fetch(uri);
-  const data = await response.json();
-  showCategory(data.data.news_category);
+  try {
+    const response = await fetch(uri);
+    const data = await response.json();
+    showCategory(data.data.news_category);
+  } catch (err) {
+    alert(err);
+  }
 })();
 
 function showCategory(categories) {
@@ -51,10 +55,14 @@ categoryNav.addEventListener("click", function (e) {
 
 async function loadNews(category_id, catagoryName) {
   const uri = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
-  const response = await fetch(uri);
-  const data = await response.json();
-  showNews(data.data);
-  countNewsOrEmpty(data.data, catagoryName);
+  try {
+    const response = await fetch(uri);
+    const data = await response.json();
+    showNews(data.data);
+    countNewsOrEmpty(data.data, catagoryName);
+  } catch (err) {
+    alert(err);
+  }
 }
 
 function checkMaximumWords(texts) {
