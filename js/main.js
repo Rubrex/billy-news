@@ -8,7 +8,7 @@ const modalTitle = document.getElementById("modal-title");
 const modalDetails = document.getElementById("modal-details");
 const modalCross = document.getElementById("modal-cross");
 // IIFE for loading Categories
-(async function getCategory(categoryNav) {
+(async function () {
   const uri = "https://openapi.programming-hero.com/api/news/categories";
   try {
     const response = await fetch(uri);
@@ -16,6 +16,9 @@ const modalCross = document.getElementById("modal-cross");
     showCategory(data.data.news_category);
   } catch (err) {
     alert(err + ", Please check your Internet connection");
+  } finally {
+    // Load Breaking News by Default
+    loadDefault();
   }
 })();
 
@@ -44,8 +47,8 @@ function countNewsOrEmpty(data, catagoryName) {
 categoryNav.addEventListener("click", function (e) {
   if (e.target.tagName === "A") {
     // show spinner
-    spinner.classList.remove("hidden");
     spinner.classList.add("flex");
+    spinner.classList.remove("hidden");
     // Load news
     const catagoryName = e.target.innerText;
     loadNews(e.target.id, catagoryName);
@@ -54,7 +57,9 @@ categoryNav.addEventListener("click", function (e) {
     navBtns.forEach((btn) => btn.classList.remove("active"));
     // Add active class only on clicked button
     const btn = document.getElementById(e.target.id);
-    btn.classList.toggle("active");
+    btn.classList.add("active");
+    // clear cardContainer
+    cardsContainer.innerHTML = "";
   }
 });
 
@@ -68,7 +73,6 @@ async function loadNews(category_id, catagoryName) {
     articles.sort((a, b) => b.total_view - a.total_view);
     showNews(articles);
     countNewsOrEmpty(data.data, catagoryName);
-    console.log(articles);
   } catch (err) {
     alert(err);
   }
@@ -85,8 +89,8 @@ function checkMaximumWords(texts) {
 
 function showNews(allNews) {
   // disable spinner
-  spinner.classList.remove("flex");
   spinner.classList.add("hidden");
+  spinner.classList.remove("flex");
   //   Show news
   cardsContainer.innerHTML = "";
   if (allNews.length === 0) {
@@ -142,10 +146,11 @@ function showNews(allNews) {
               </div>
               <!-- Star Ratings -->
               <div>
+                  
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star-half-stroke"></i>
-                <i class="fa-regular fa-star"></i>
-                <i class="fa-regular fa-star"></i>
                 <i class="fa-regular fa-star"></i>
               </div>
               <!-- arrow -->
@@ -180,3 +185,19 @@ function showModal(data) {
 }
 // Clear modal image after pressing cross button
 modalCross.addEventListener("click", () => modalImage.setAttribute("src", ""));
+
+// Load Breaking news by default
+function loadDefault() {
+  // show spinner
+  spinner.classList.add("flex");
+  spinner.classList.remove("hidden");
+  // Load news
+  const catagoryName = "Breaking News";
+  loadNews("01", catagoryName);
+  // Clear active class on all buttons
+  const navBtns = document.querySelectorAll("#category-nav>li");
+  navBtns.forEach((btn) => btn.classList.remove("active"));
+  // Add active class only on clicked button
+  const btn = document.getElementById("01");
+  btn.classList.add("active");
+}
