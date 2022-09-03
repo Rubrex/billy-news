@@ -52,7 +52,16 @@ async function loadNews(category_id, catagoryName) {
   countNewsOrEmpty(data.data, catagoryName);
 }
 
-function showNews(allNews, catagoryName) {
+function checkMaximumWords(texts) {
+  if (texts.length > 500) {
+    const trimedText = texts.slice(0, 500) + " ...";
+    return trimedText;
+  } else {
+    return texts;
+  }
+}
+
+function showNews(allNews) {
   cardsContainer.innerHTML = "";
   allNews.forEach((news) => {
     const div = document.createElement("div");
@@ -76,8 +85,8 @@ function showNews(allNews, catagoryName) {
         >
           ${news.title}
         </h2>
-        <p class="text-articlePeraColor text-md md:text-xl mt-2 md:mt-0">
-         ${news.details}
+        <p class="text-articlePeraColor text-md md:text-lg mt-2 md:mt-0">
+         ${checkMaximumWords(news.details)}
         </p>
         <div
           class="flex justify-between flex-wrap items-center mt-4 md:mt-0"
