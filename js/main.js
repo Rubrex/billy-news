@@ -19,26 +19,47 @@ function showCategory(categories) {
   });
 }
 
+// Display if News found and how many
+function countNewsOrEmpty(data, catagoryName) {
+  const countNews = document.getElementById("count-news");
+  if (data.length === 0) {
+    countNews.innerText = `No news found for category ${catagoryName}`;
+  } else {
+    countNews.innerText = `${data.length} Items found for category ${catagoryName}`;
+  }
+}
+
 // Display News When clicked on a category
+
 categoryNav.addEventListener("click", function (e) {
   if (e.target.tagName === "A") {
-    loadNews(e.target.id);
+    const catagoryName = e.target.innerText;
+    loadNews(e.target.id, catagoryName);
+    // Clear active class on all buttons
+    const navBtns = document.querySelectorAll("#category-nav>li>a");
+    navBtns.forEach((btn) => btn.classList.remove("active"));
+    // Add active class
+    const btn = document.getElementById(e.target.id);
+    btn.classList.toggle("active");
   }
 });
 
-async function loadNews(category_id) {
+async function loadNews(category_id, catagoryName) {
   const uri = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
   const response = await fetch(uri);
   const data = await response.json();
   showNews(data.data);
+  countNewsOrEmpty(data.data, catagoryName);
 }
 
-function showNews(allNews) {
+function showNews(allNews, catagoryName) {
   cardsContainer.innerHTML = "";
   allNews.forEach((news) => {
     const div = document.createElement("div");
     div.innerHTML = `
-    <div class="bg-white rounded-md shadow-md my-6 cursor-pointer hover:shadow-sm transition-shadow" id="${news._id}">
+    <div class="bg-white rounded-md shadow-md my-6 cursor-pointer hover:shadow-sm transition-shadow" id="${
+      news._id
+    }">
     <div class="grid grid-cols-1 md:grid-cols-4 p-6">
       <!-- News Image -->
       <div class="mr-2 mb-4 md:mb-0">
@@ -63,16 +84,20 @@ function showNews(allNews) {
         >
           <!-- Author -->
           <div class="text-articleRatingsColor flex">
-            <img src="${news.author.img}" alt="" class="w-12 mr-3" />
+            <img src="${
+              news.author.img
+            }" alt="" class="w-12 mr-3 rounded-full" />
             <div class="flex flex-col text-slate-700">
-              <p class="font-medium">${news.author.name}</p>
+              <p class="font-medium">${
+                news.author.name ? news.author.name : "No data found"
+              }</p>
               <p class="text-slate-400">${news.author.published_date}</p>
             </div>
           </div>
           <!-- Views -->
           <div class="font-bold text-xl text-slate-700 px-2">
             <i class="fa-regular fa-eye"></i>
-            <span>${news.total_view}</span>
+            <span>${news.total_view ? news.total_view : "Not Found"}</span>
           </div>
           <!-- Star Ratings -->
           <div>
