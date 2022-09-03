@@ -6,6 +6,7 @@ const spinner = document.getElementById("spinner");
 const modalImage = document.getElementById("modal-image");
 const modalTitle = document.getElementById("modal-title");
 const modalDetails = document.getElementById("modal-details");
+const modalCross = document.getElementById("modal-cross");
 // IIFE for loading Categories
 (async function getCategory(categoryNav) {
   const uri = "https://openapi.programming-hero.com/api/news/categories";
@@ -51,7 +52,7 @@ categoryNav.addEventListener("click", function (e) {
     // Clear active class on all buttons
     const navBtns = document.querySelectorAll("#category-nav>li>a");
     navBtns.forEach((btn) => btn.classList.remove("active"));
-    // Add active class
+    // Add active class only on clicked button
     const btn = document.getElementById(e.target.id);
     btn.classList.toggle("active");
   }
@@ -172,9 +173,10 @@ async function getModalInfo(news_id) {
 }
 
 function showModal(data) {
-  console.log(data);
   //   Update Modal View
   modalImage.setAttribute("src", data.image_url);
   modalTitle.innerText = data.title;
   modalDetails.innerText = data.details;
 }
+// Clear modal image after pressing cross button
+modalCross.addEventListener("click", () => modalImage.setAttribute("src", ""));
