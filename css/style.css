@@ -3,3 +3,8 @@
 article {
   font-family: "Roboto", sans-serif;
 }
+
+button.active,
+a.active {
+  background-color: #3b82f6;
+}
