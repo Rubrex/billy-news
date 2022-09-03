@@ -1,6 +1,7 @@
 // Global variables
 const categoryNav = document.getElementById("category-nav");
 const cardsContainer = document.getElementById("cards-container");
+const spinner = document.getElementById("spinner");
 // IIFE for loading Categories
 (async function getCategory(categoryNav) {
   const uri = "https://openapi.programming-hero.com/api/news/categories";
@@ -33,6 +34,10 @@ function countNewsOrEmpty(data, catagoryName) {
 
 categoryNav.addEventListener("click", function (e) {
   if (e.target.tagName === "A") {
+    // show spinner
+    spinner.classList.remove("hidden");
+    spinner.classList.add("flex");
+    // Load news
     const catagoryName = e.target.innerText;
     loadNews(e.target.id, catagoryName);
     // Clear active class on all buttons
@@ -62,70 +67,80 @@ function checkMaximumWords(texts) {
 }
 
 function showNews(allNews) {
+  // disable spinner
+  spinner.classList.remove("flex");
+  spinner.classList.add("hidden");
+  //   Show news
   cardsContainer.innerHTML = "";
-  allNews.forEach((news) => {
+  if (allNews.length === 0) {
     const div = document.createElement("div");
-    div.innerHTML = `
-    <div class="bg-white rounded-md shadow-md my-6 cursor-pointer hover:shadow-sm transition-shadow" id="${
-      news._id
-    }">
-    <div class="grid grid-cols-1 md:grid-cols-4 p-6">
-      <!-- News Image -->
-      <div class="mr-2 mb-4 md:mb-0">
-        <img
-          src="${news.thumbnail_url}"
-          alt=""
-          class="mx-auto md:mx-0"
-        />
-      </div>
-      <!-- News Description -->
-      <div class="col-span-3 flex flex-col justify-around">
-        <h2
-          class="text-articleHeadingColor text-xl md:text-2xl font-bold"
-        >
-          ${news.title}
-        </h2>
-        <p class="text-articlePeraColor text-md md:text-lg mt-2 md:mt-0">
-         ${checkMaximumWords(news.details)}
-        </p>
-        <div
-          class="flex justify-between flex-wrap items-center mt-4 md:mt-0"
-        >
-          <!-- Author -->
-          <div class="text-articleRatingsColor flex">
-            <img src="${
-              news.author.img
-            }" alt="" class="w-12 mr-3 rounded-full" />
-            <div class="flex flex-col text-slate-700">
-              <p class="font-medium">${
-                news.author.name ? news.author.name : "No data found"
-              }</p>
-              <p class="text-slate-400">${news.author.published_date}</p>
+    div.innerHTML = `<h2 class="text-xl text-center">Nothing to Show</h2>`;
+    cardsContainer.appendChild(div);
+  } else {
+    allNews.forEach((news) => {
+      const div = document.createElement("div");
+      div.innerHTML = `
+        <div class="bg-white rounded-md shadow-md my-6 cursor-pointer hover:shadow-sm transition-shadow" id="${
+          news._id
+        }">
+        <div class="grid grid-cols-1 md:grid-cols-4 p-6">
+          <!-- News Image -->
+          <div class="mr-2 mb-4 md:mb-0">
+            <img
+              src="${news.thumbnail_url}"
+              alt=""
+              class="mx-auto md:mx-0"
+            />
+          </div>
+          <!-- News Description -->
+          <div class="col-span-3 flex flex-col justify-around">
+            <h2
+              class="text-articleHeadingColor text-xl md:text-2xl font-bold"
+            >
+              ${news.title}
+            </h2>
+            <p class="text-articlePeraColor text-md md:text-lg mt-2 md:mt-0">
+             ${checkMaximumWords(news.details)}
+            </p>
+            <div
+              class="flex justify-between flex-wrap items-center mt-4 md:mt-0"
+            >
+              <!-- Author -->
+              <div class="text-articleRatingsColor flex">
+                <img src="${
+                  news.author.img
+                }" alt="" class="w-12 mr-3 rounded-full" />
+                <div class="flex flex-col text-slate-700">
+                  <p class="font-medium">${
+                    news.author.name ? news.author.name : "No data found"
+                  }</p>
+                  <p class="text-slate-400">${news.author.published_date}</p>
+                </div>
+              </div>
+              <!-- Views -->
+              <div class="font-bold text-xl text-slate-700 px-2">
+                <i class="fa-regular fa-eye"></i>
+                <span>${news.total_view ? news.total_view : "Not Found"}</span>
+              </div>
+              <!-- Star Ratings -->
+              <div>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star-half-stroke"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+              </div>
+              <!-- arrow -->
+    
+              <i
+                class="fa-solid fa-arrow-right text-blue-600 text-2xl hover:translate-x-1 cursor-pointer transition-all"
+              ></i>
             </div>
           </div>
-          <!-- Views -->
-          <div class="font-bold text-xl text-slate-700 px-2">
-            <i class="fa-regular fa-eye"></i>
-            <span>${news.total_view ? news.total_view : "Not Found"}</span>
-          </div>
-          <!-- Star Ratings -->
-          <div>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star-half-stroke"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-            <i class="fa-regular fa-star"></i>
-          </div>
-          <!-- arrow -->
-
-          <i
-            class="fa-solid fa-arrow-right text-blue-600 text-2xl hover:translate-x-1 cursor-pointer transition-all"
-          ></i>
         </div>
       </div>
-    </div>
-  </div>
-    `;
-    cardsContainer.appendChild(div);
-  });
+        `;
+      cardsContainer.appendChild(div);
+    });
+  }
 }
