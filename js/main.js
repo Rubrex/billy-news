@@ -2,6 +2,10 @@
 const categoryNav = document.getElementById("category-nav");
 const cardsContainer = document.getElementById("cards-container");
 const spinner = document.getElementById("spinner");
+// Modal Variables
+const modalImage = document.getElementById("modal-image");
+const modalTitle = document.getElementById("modal-title");
+const modalDetails = document.getElementById("modal-details");
 // IIFE for loading Categories
 (async function getCategory(categoryNav) {
   const uri = "https://openapi.programming-hero.com/api/news/categories";
@@ -10,7 +14,7 @@ const spinner = document.getElementById("spinner");
     const data = await response.json();
     showCategory(data.data.news_category);
   } catch (err) {
-    alert(err);
+    alert(err + ", Please check your Internet connection");
   }
 })();
 
@@ -88,9 +92,9 @@ function showNews(allNews) {
     allNews.forEach((news) => {
       const div = document.createElement("div");
       div.innerHTML = `
-        <div class="bg-white rounded-md shadow-md my-6 cursor-pointer hover:shadow-sm transition-shadow" id="${
+        <label class="bg-white rounded-md shadow-sm my-6 cursor-pointer hover:shadow-md transition-shadow " id="${
           news._id
-        }">
+        }" onclick="getModalInfo('${news._id}')" for="my-modal-3">
         <div class="grid grid-cols-1 md:grid-cols-4 p-6">
           <!-- News Image -->
           <div class="mr-2 mb-4 md:mb-0">
@@ -146,9 +150,25 @@ function showNews(allNews) {
             </div>
           </div>
         </div>
-      </div>
+      </label>
         `;
       cardsContainer.appendChild(div);
     });
   }
+}
+
+// Modal Handlers
+async function getModalInfo(news_id) {
+  const uri = `https://openapi.programming-hero.com/api/news/${news_id}`;
+  const response = await fetch(uri);
+  const data = await response.json();
+  showModal(data.data[0]);
+}
+
+function showModal(data) {
+  console.log(data);
+  //   Update Modal View
+  modalImage.setAttribute("src", data.image_url);
+  modalTitle.innerText = data.title;
+  modalDetails.innerText = data.details;
 }
