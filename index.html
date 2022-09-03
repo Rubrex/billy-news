@@ -37,8 +37,8 @@
     <title>Billy News | Newsportal</title>
   </head>
   <body class="bg-backgroundColor">
-    <header class="container mx-auto bg-backgroundColor">
-      <div class="navbar bg-backgroundColor p-0">
+    <header class="py-3">
+      <div class="navbar p-0 container mx-auto">
         <div class="flex-1">
           <a href="index.html" class="btn btn-ghost normal-case text-xl p-0"
             ><span class="bg-blue-500 py-1 px-3 mr-1 rounded-md text-white"
@@ -50,7 +50,7 @@
         <div class="flex-none gap-2">
           <!-- Links -->
           <div class="flex-none">
-            <ul class="menu menu-horizontal p-0 font-medium hidden md:flex">
+            <ul class="menu menu-horizontal p-0 font-medium hidden md:flex gap-2">
               <li><a href="index.html" class="active">News</a></li>
               <li><a href="blog.html">Blog</a></li>
             </ul>
@@ -93,9 +93,9 @@
     </header>
     <main class="container mx-auto mt-6">
       <!-- Nav Links -->
-      <section>
-        <nav>
-          <ul class="menu menu-horizontal p-0 font-medium flex-wrap" id="category-nav">
+      <section class="lg:sticky top-0 glass p-1">
+        <nav >
+          <ul class="menu menu-horizontal p-0 font-medium flex-wrap gap-2" id="category-nav">
             <!-- Dynamically added from Main.js showCategory(categories) -->
           </ul>
         </nav>
@@ -147,8 +147,8 @@
     </footer>
     <!-- Modal -->
     <input type="checkbox" id="my-modal-3" class="modal-toggle" />
-    <div class="modal">
-      <div class="modal-box  modal-box w-9/12 max-w-5xl">
+    <div class="modal ">
+      <div class="modal-box  modal-box w-9/12 max-w-5xl ">
         <label for="my-modal-3" class="btn btn-sm  absolute right-2 top-2" id="modal-cross">✕</label>
         <div class=" ">
           <!-- modal image -->

@@ -41,3 +41,13 @@ a.active {
     transform: rotate(1800deg);
   }
 }
+code {
+  color: #e94560;
+  background-color: rgb(187, 187, 187);
+  padding: 0 5px;
+  border-radius: 5px;
+}
+.card-body p {
+  font-size: 17px;
+  margin-top: 12px;
+}

@@ -3,39 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Font Awesome -->
-    <script
-      src="https://kit.fontawesome.com/28551a1f4e.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- DaisyUI CDN  -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              backgroundColor: "#F6F6F6",
-              articleHeadingColor: "#121221",
-              articlePeraColor: "#949494",
-              articleRatingsColor: "#515151",
-            },
-          },
-        },
-      };
-    </script>
-    <!-- custom CSS -->
-    <link rel="stylesheet" href="css/style.css" />
-    <title>Global News | Newsportal</title>
+   <!-- Favicon -->
+   <link rel="shortcut icon" href="assets/favicon.png" type="image/x-icon">
+   <!-- Font Awesome -->
+   <script
+     src="https://kit.fontawesome.com/28551a1f4e.js"
+     crossorigin="anonymous"
+   ></script>
+   <!-- DaisyUI CDN  -->
+   <link
+     href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css"
+     rel="stylesheet"
+     type="text/css"
+   />
+   <!-- Tailwind CDN -->
+   <script src="https://cdn.tailwindcss.com"></script>
+   <script>
+     tailwind.config = {
+       theme: {
+         extend: {
+           colors: {
+             backgroundColor: "#F6F6F6",
+             articleHeadingColor: "#121221",
+             articlePeraColor: "#949494",
+             articleRatingsColor: "#515151",
+           },
+         },
+       },
+     };
+   </script>
+   <!-- custom CSS -->
+   <link rel="stylesheet" href="css/style.css" />
+   <title>Billy News | Newsportal</title>
   </head>
   <body class="bg-backgroundColor">
-    <header class="container mx-auto bg-backgroundColor">
+    <header class="container mx-auto bg-backgroundColor py-3">
         <div class="navbar bg-backgroundColor p-0">
           <div class="flex-1">
             <a href="index.html" class="btn btn-ghost normal-case text-xl p-0"
@@ -48,7 +50,7 @@
           <div class="flex-none gap-2">
             <!-- Links -->
             <div class="flex-none">
-              <ul class="menu menu-horizontal p-0 font-medium hidden md:flex">
+              <ul class="menu menu-horizontal p-0 font-medium hidden md:flex gap-2">
                 <li><a href="index.html" >News</a></li>
                 <li><a href="blog.html" class="active">Blog</a></li>
               </ul>
@@ -94,7 +96,7 @@
      <section>
         <div class="card w-full bg-base-100 shadow-md hover:shadow-sm transition-shadow my-3">
             <div class="card-body">
-              <h2 class="card-title">What are the difference between var, let and const ?</h2>
+              <h2 class="card-title">What are the difference between <code>var</code>, <code>let</code> and <code>const</code> ?</h2>
               <p>var is function scoped whereas let and const is block scoped. 
                 We can re-declaire var but we can't re-declaire let and const. 
                 Also var is hoisted that means it will automatically become global variable when used outside function scope</p>
@@ -102,40 +104,23 @@
           </div>
         <div class="card w-full bg-base-100 shadow-md hover:shadow-sm transition-shadow my-3">
             <div class="card-body">
-              <h2 class="card-title">What are the difference between car, let and const ?</h2>
+              <h2 class="card-title">What are the difference between Arrow Function and Regular Function?</h2>
+              <p><code>Lorem</code> ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit ex ab amet modi autem rem dolorum distinctio vitae unde perspiciatis hic, quis numquam fuga tenetur soluta reiciendis fugiat architecto aut.</p>
+            </div>
+          </div>
+        <div class="card w-full bg-base-100 shadow-md hover:shadow-sm transition-shadow my-3">
+            <div class="card-body">
+              <h2 class="card-title">What are the difference in <code>map()</code> , <code>forEach()</code>, <code>filter()</code> and <code>find()</code> Methods</h2>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit ex ab amet modi autem rem dolorum distinctio vitae unde perspiciatis hic, quis numquam fuga tenetur soluta reiciendis fugiat architecto aut.</p>
             </div>
           </div>
         <div class="card w-full bg-base-100 shadow-md hover:shadow-sm transition-shadow my-3">
             <div class="card-body">
-              <h2 class="card-title">What are the difference between car, let and const ?</h2>
+              <h2 class="card-title">Why should we use Template String?</h2>
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit ex ab amet modi autem rem dolorum distinctio vitae unde perspiciatis hic, quis numquam fuga tenetur soluta reiciendis fugiat architecto aut.</p>
             </div>
           </div>
-        <div class="card w-full bg-base-100 shadow-md hover:shadow-sm transition-shadow my-3">
-            <div class="card-body">
-              <h2 class="card-title">What are the difference between car, let and const ?</h2>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit ex ab amet modi autem rem dolorum distinctio vitae unde perspiciatis hic, quis numquam fuga tenetur soluta reiciendis fugiat architecto aut.</p>
-            </div>
-          </div>
-        <div class="card w-full bg-base-100 shadow-md hover:shadow-sm transition-shadow my-3">
-            <div class="card-body">
-              <h2 class="card-title">What are the difference between car, let and const ?</h2>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit ex ab amet modi autem rem dolorum distinctio vitae unde perspiciatis hic, quis numquam fuga tenetur soluta reiciendis fugiat architecto aut.</p>
-            </div>
-          </div>
-        <div class="card w-full bg-base-100 shadow-md hover:shadow-sm transition-shadow my-3">
-            <div class="card-body">
-              <h2 class="card-title">What are the difference between car, let and const ?</h2>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit ex ab amet modi autem rem dolorum distinctio vitae unde perspiciatis hic, quis numquam fuga tenetur soluta reiciendis fugiat architecto aut.</p>
-            </div>
-          </div>
-        <div class="card w-full bg-base-100 shadow-md hover:shadow-sm transition-shadow my-3">
-            <div class="card-body">
-              <h2 class="card-title">What are the difference between car, let and const ?</h2>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit ex ab amet modi autem rem dolorum distinctio vitae unde perspiciatis hic, quis numquam fuga tenetur soluta reiciendis fugiat architecto aut.</p>
-            </div>
-          </div>
+        
      </section>
     </main>
     <footer class="bg-white mt-16">
